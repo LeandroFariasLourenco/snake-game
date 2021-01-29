@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+html(lang="pt-br")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Snake Game
+    script(src="js/game.js")
+    script(src="js/vendor.js")
+  body
+    section(class="game__wrapper")
+      div(class="game__canvas__wrapper")
+        canvas(width="700" height="500" id="game" class="game__canvas")
+
+      div(class="game__information")
+        div(class="game__pause")
+          button(class="js--pause game__pause__btn") Pause
+
+      div(class="game__score") Score
+        span(class="js--score") 0
+      

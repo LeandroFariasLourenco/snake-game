@@ -1,0 +1,29 @@
+.game {
+  &__wrapper {
+    flex-flow: column;
+
+    @include flex-centered;
+  }
+
+  &__canvas {
+    transition: height 1s ease-in-out;
+    border: rem(1px) solid #fff;
+
+    &__wrapper {
+      width: rem(700px);
+      height: rem(500px);
+      border: rem(3px) solid white;
+      background-image: url('https://wallpaperaccess.com/full/13392.jpg');
+      background-size: cover;
+      background-position: center;
+
+      @include flex-centered;
+    }
+  }
+
+  &__score {
+    color: #fff;
+    font-size: rem(20px);
+    font-family: "Orbitron", sans-serif;
+  }
+}

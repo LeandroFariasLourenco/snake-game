@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+html(lang="pt-br")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Snake Game
+    link(rel="stylesheet", href="../css/globals.css")
+    link(rel="stylesheet", href="../css/home.css")
+    script(src="../js/vendor.js")
+    script(src="../js/home.js")
+  body
+    section(class="home__wrapper")
+      div(class="home__wrapper__heading")
+        h1(class="home__wrapper__title") Snake Game
+
+      div(class="home__wrapper__options")
+        a(class="home__wrapper__option js--play" href="/views/game.html") Play
+
+        a(class="home__wrapper__option" href="") Leaderboards
+        
+        a(class="home__wrapper__option" href="") Options
+      
+      div(class="home__wrapper__sidenote")
+        img(class="home__wrapper__sidenote__image" src="https://i.pinimg.com/originals/30/1b/43/301b43842dad105f79a9682c2d24f34f.gif")
+
+    section(class="home__overlay")
+    section(class="home__nickname")
+      form(class="home__nickname__form")
+        input(class="home__nickname__field" type="text" maxLength="20" required)
+        button(class="home__nickname__save") Enter
