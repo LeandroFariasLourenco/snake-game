@@ -1,0 +1,32 @@
+@mixin flex-centered () {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin button-transition () {
+  transition: background-color 350ms, color 350ms, opacity 300ms, visibility 300ms ease-in-out;
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+@mixin center-absolute () {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin smooth-hide-show () {
+  transition: opacity 300ms, visibility 300ms ease-in-out;
+  opacity: 1;
+  visibility: unset;
+
+  &:not(.active) {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

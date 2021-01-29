@@ -13,9 +13,9 @@
       width: rem(700px);
       height: rem(500px);
       border: rem(3px) solid white;
-      background-image: url('https://wallpaperaccess.com/full/13392.jpg');
-      background-size: cover;
-      background-position: center;
+      // background-image: url('https://wallpaperaccess.com/full/13392.jpg');
+      // background-size: cover;
+      // background-position: center;
 
       @include flex-centered;
     }

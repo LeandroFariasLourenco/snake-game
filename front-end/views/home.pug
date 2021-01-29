@@ -9,22 +9,40 @@ html(lang="pt-br")
     script(src="../js/vendor.js")
     script(src="../js/home.js")
   body
-    section(class="home__wrapper")
-      div(class="home__wrapper__heading")
+    section(class="home__wrapper fadeInUp")
+      div(class="home__wrapper__heading animated fade")
         h1(class="home__wrapper__title") Snake Game
 
-      div(class="home__wrapper__options")
-        a(class="home__wrapper__option js--play" href="/views/game.html") Play
+      div(class="home__wrapper__welcome animated fade")
+        h2(class="home__wrapper__nickname js--nickname")
 
-        a(class="home__wrapper__option" href="") Leaderboards
+      div(class="home__wrapper__options")
+        a(class="home__wrapper__option js--play animated fade" href="/views/game.html") Play
+
+        a(class="home__wrapper__option animated fade" href="") Leaderboards
         
-        a(class="home__wrapper__option" href="") Options
+        a(class="home__wrapper__option animated fade" href="") Options
       
       div(class="home__wrapper__sidenote")
-        img(class="home__wrapper__sidenote__image" src="https://i.pinimg.com/originals/30/1b/43/301b43842dad105f79a9682c2d24f34f.gif")
+        img(
+          class="home__wrapper__sidenote__image"
+          src="https://i.pinimg.com/originals/30/1b/43/301b43842dad105f79a9682c2d24f34f.gif"
+        )
 
-    section(class="home__overlay")
-    section(class="home__nickname")
-      form(class="home__nickname__form")
-        input(class="home__nickname__field" type="text" maxLength="20" required)
-        button(class="home__nickname__save") Enter
+    section(class="home__overlay js--home-overlay")
+    section(class="home__nickname js--home-overlay-content")
+      form(class="home__nickname__form js--home-form")
+        input(
+          required
+          type="text"
+          maxLength="20"
+          class="home__nickname__field js--home-input"
+          placeholder="Type in your Nickname"
+          oninput="this.setCustomValidity('')"
+          oninvalid="this.setCustomValidity('Please type in your nickname!')"
+          title="Nickname"
+        )
+
+        button(class="home__nickname__save js--home-save" type="submit") Enter
+
+        button(class="home__nickname__close js--home-close" type="button") Close

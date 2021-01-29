@@ -55,10 +55,10 @@ export default class Snake {
       && newSnakeHead.y === this.Food.positionY;
 
     if (hasEatenFood && this.speed - 10 > 30) {
-      this.speed -= 10;
+      this.speed -= 5;
     }
 
-    if (hasEatenFood && (this.canvas.height - 10 > 330 || this.canvas.width - 20 > 450)) {
+    if (hasEatenFood && (this.canvas.height - 10 > 300 || this.canvas.width - 20 > 400)) {
       this.canvas.height -= 10;
       this.canvas.width -= 20;
     }

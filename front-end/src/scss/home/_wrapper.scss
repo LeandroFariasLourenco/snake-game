@@ -5,6 +5,14 @@
 
   @include flex-centered;
 
+  &__nickname {
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: rem(15px);
+    font-size: rem(22px);
+    font-style: italic;
+  }
+
   &__title {
     color: #fff;
     font-family: 'Orbitron', sans-serif;
@@ -22,21 +30,15 @@
 
   &__option {
     width: 50%;
-    border: rem(3px) solid #fff;
-    background-color: #000;
-    padding: rem(15px);
     display: block;
-    margin: rem(5px) 0;
-    color: #fff;
-    transition: background-color 500ms, color 500ms ease-in-out;
-    text-align: center;
-    font-family: 'Orbitron', sans-serif;
-    text-decoration: none;
+    padding: rem(10px) 0;
+    font-size: rem(20px);
 
-    &:hover {
-      background-color: #fff;
-      color: #000;
-    }
+    @extend %button;
+    //
+    border: none;
+
+    @include button-transition;
   }
 
   &__sidenote {
