@@ -1,15 +1,26 @@
+import textures from '../textures';
+
 export default class Food {
+  texture = new Image(
+    textures.fruitTexture.width,
+    textures.fruitTexture.height,
+  );
+
   constructor(canvas, px, py) {
-    this.canvas = canvas;
-    this.canvasContext = canvas.getContext('2d');
     this.positionY = py;
     this.positionX = px;
+    this.canvas = canvas;
+    this.canvasContext = canvas.getContext('2d');
+    this.texture.src = textures.fruitTexture.source;
   }
 
   drawFood() {
-    this.canvasContext.fillStyle = 'lightgreen';
-    this.canvasContext.strokestyle = 'darkblue';
-    this.canvasContext.strokeRect(this.positionX, this.positionY, 10, 10);
-    this.canvasContext.fillRect(this.positionX, this.positionY, 10, 10);
+    this.canvasContext.drawImage(
+      this.texture,
+      this.positionX - 5,
+      this.positionY - 5,
+      this.texture.width,
+      this.texture.height,
+    );
   }
 }

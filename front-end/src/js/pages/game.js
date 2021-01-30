@@ -9,6 +9,7 @@ const game = {
 
     const Snake = new SnakeClass(canvas);
     const Game = new GameClass(canvas, Snake);
+    Snake.snakeFrame = Game;
 
     document.addEventListener('keydown', (ev) => {
       Snake.changeDirection(ev);

@@ -1,4 +1,5 @@
 import Selectors from '../cacheSelectors/game';
+import textures from '../textures';
 
 export default class Game {
   isGamePaused = window.GAME.paused;
@@ -7,13 +8,43 @@ export default class Game {
     this.canvas = canvas;
     this.canvasContext = canvas.getContext('2d');
     this.Snake = snake;
+
+    this.gameWidthSize = this.canvas.width - 20;
+    this.gameHeightSize = this.canvas.height - 20;
   }
 
   drawCanvas() {
-    this.canvasContext.fillStyle = 'black';
-    this.canvasContext.strokestyle = 'black';
-    this.canvasContext.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.canvasContext.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    const canvasTexture = new Image(
+      textures.backgroundTexture.width,
+      textures.backgroundTexture.height,
+    );
+    canvasTexture.src = textures.backgroundTexture.source;
+    this.canvasContext.drawImage(
+      canvasTexture,
+      0,
+      0,
+      this.canvas.width,
+      this.canvas.height,
+    );
+
+    this.canvasContext.save();
+    const gameFrameTexture = new Image(
+      textures.gameFrameTexture.width,
+      textures.gameFrameTexture.height,
+    );
+    gameFrameTexture.src = textures.gameFrameTexture.source;
+    this.canvasContext.translate(
+      this.canvas.width / 2,
+      this.canvas.height / 2,
+    );
+    this.canvasContext.drawImage(
+      gameFrameTexture,
+      -(this.gameWidthSize / 2),
+      -(this.gameHeightSize / 2),
+      this.gameWidthSize,
+      this.gameHeightSize,
+    );
+    this.canvasContext.restore();
   }
 
   hasGameEnded() {
@@ -27,17 +58,20 @@ export default class Game {
       }
     }
 
-    const hasHitLeftBorder = snakeHead.x < 0;
-    const hasHitRightBorder = snakeHead.x > this.canvas.width - 10;
-    const hasHitBottomBorder = snakeHead.y > this.canvas.height - 10;
-    const hasHitTopBorder = snakeHead.y < 0;
+    const hasHitLeftBorder = snakeHead.x < this.gameWidthSize;
+    console.log(this.canvas.width, this.gameWidthSize, snakeHead.x);
+    const hasHitRightBorder = snakeHead.x > this.gameWidthSize;
+    const hasHitBottomBorder = snakeHead.y < (this.canvas.height - this.gameHeightSize);
+    const hasHitTopBorder = snakeHead.y > this.gameHeightSize;
 
     return hasHitBottomBorder || hasHitTopBorder || hasHitRightBorder || hasHitLeftBorder;
   }
 
   togglePause(ev) {
     const keyPressed = ev.keyCode;
-    if (keyPressed === 32) {
+    const spacebar = 32;
+
+    if (keyPressed === spacebar) {
       const togglePaused = new Event('togglePause');
       Selectors.pause.dispatchEvent(togglePaused);
       window.GAME.paused = !window.GAME.paused;
@@ -65,6 +99,6 @@ export default class Game {
       this.Snake.moveSnake();
 
       this.renderGame();
-    }, this.Snake.speed);
+    }, 25);
   }
 }
