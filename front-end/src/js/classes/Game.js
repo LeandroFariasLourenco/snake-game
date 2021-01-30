@@ -4,13 +4,17 @@ import textures from '../textures';
 export default class Game {
   isGamePaused = window.GAME.paused;
 
+  frameDecrement = 20;
+
+  sizeMultiplier = 0;
+
   constructor(canvas, snake) {
     this.canvas = canvas;
     this.canvasContext = canvas.getContext('2d');
     this.Snake = snake;
 
-    this.gameWidthSize = this.canvas.width - 20;
-    this.gameHeightSize = this.canvas.height - 20;
+    this.widthSize = this.canvas.width - this.frameDecrement;
+    this.heightSize = this.canvas.height - this.frameDecrement;
   }
 
   drawCanvas() {
@@ -39,10 +43,10 @@ export default class Game {
     );
     this.canvasContext.drawImage(
       gameFrameTexture,
-      -(this.gameWidthSize / 2),
-      -(this.gameHeightSize / 2),
-      this.gameWidthSize,
-      this.gameHeightSize,
+      -(this.widthSize / 2),
+      -(this.heightSize / 2),
+      this.widthSize,
+      this.heightSize,
     );
     this.canvasContext.restore();
   }
@@ -58,11 +62,14 @@ export default class Game {
       }
     }
 
-    const hasHitLeftBorder = snakeHead.x < this.gameWidthSize;
-    console.log(this.canvas.width, this.gameWidthSize, snakeHead.x);
-    const hasHitRightBorder = snakeHead.x > this.gameWidthSize;
-    const hasHitBottomBorder = snakeHead.y < (this.canvas.height - this.gameHeightSize);
-    const hasHitTopBorder = snakeHead.y > this.gameHeightSize;
+    const frameBoundary = this.frameDecrement / 2;
+    const frameMinPosition = this.sizeMultiplier * frameBoundary;
+
+    const hasHitLeftBorder = snakeHead.x <= this.sizeMultiplier * frameBoundary;
+    const hasHitTopBorder = snakeHead.y <= this.sizeMultiplier * frameBoundary;
+
+    const hasHitRightBorder = snakeHead.x > this.widthSize + frameMinPosition;
+    const hasHitBottomBorder = snakeHead.y > this.heightSize + frameMinPosition;
 
     return hasHitBottomBorder || hasHitTopBorder || hasHitRightBorder || hasHitLeftBorder;
   }
@@ -99,6 +106,6 @@ export default class Game {
       this.Snake.moveSnake();
 
       this.renderGame();
-    }, 25);
+    }, 50);
   }
 }

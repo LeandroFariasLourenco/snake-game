@@ -44,8 +44,8 @@ export default class Snake {
     this.canvasContext = canvas.getContext('2d');
     this.Food = new Food(
       canvas,
-      generateFoodPosition(this.canvas.width - 30),
-      generateFoodPosition(this.canvas.height - 30),
+      generateFoodPosition(this.canvas.width - 20),
+      generateFoodPosition(this.canvas.height - 20),
     );
 
     this.snakeBodyTexture.src = textures.snakeBodyTexture.source;
@@ -53,11 +53,11 @@ export default class Snake {
   }
 
   drawSnake() {
-    this.snakeBody.forEach((position) => {
+    this.snakeBody.forEach(({ x, y }) => {
       this.canvasContext.drawImage(
         this.snakeBodyTexture,
-        position.x,
-        position.y,
+        x,
+        y,
         10,
         10,
       );
@@ -121,16 +121,26 @@ export default class Snake {
     }
 
     if (hasEatenFood
-      && (this.Game.gameHeightSize - 10 > 300 || this.Game.gameWidthSize - 20 > 400)) {
-      this.Game.gameWidthSize -= 20;
-      this.Game.gameHeightSize -= 10;
+      && (this.Game.heightSize - 10 > 300 || this.Game.widthSize - 20 > 400)) {
+      this.Game.widthSize -= this.Game.frameDecrement;
+      this.Game.heightSize -= this.Game.frameDecrement;
+      this.Game.sizeMultiplier += 1;
     }
 
     if (!hasEatenFood) {
       this.snakeBody.pop();
     } else {
-      this.Food.positionX = generateFoodPosition(this.Game.gameWidthSize - 30);
-      this.Food.positionY = generateFoodPosition(this.Game.gameHeightSize - 30);
+      generateFoodPosition();
+
+      this.snakeBody.forEach(({ x, y }) => {
+        const isFoodOnSnakeXaxis = x === this.Food.positionX;
+        const isFoodOnSnakeYaxis = y === this.Food.positionY;
+
+        if (isFoodOnSnakeXaxis && isFoodOnSnakeYaxis) {
+          generateFoodPosition();
+        }
+      });
+
       this.Food.drawFood();
 
       const scoreChange = new Event('scoreChange');
@@ -138,6 +148,13 @@ export default class Snake {
 
       window.GAME.score += 10;
     }
+  }
+
+  generateRandomFoodPosition() {
+    const minPosition = this.Game.sizeMultiplier * 10 + 20;
+
+    this.Food.positionX = generateFoodPosition(this.Game.widthSize - 20, minPosition);
+    this.Food.positionY = generateFoodPosition(this.Game.heightSize - 20, minPosition);
   }
 
   changeDirection(ev) {
