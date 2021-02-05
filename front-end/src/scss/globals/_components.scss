@@ -8,3 +8,31 @@
   text-align: center;
   text-decoration: none;
 }
+
+%container {
+  width: 25%;
+  max-width: rem(341px);
+  padding: rem(30px) rem(20px);
+}
+
+%game-button {
+  color: #fff;
+  font-family: "Orbitron", sans-serif;
+  text-align: center;
+  background-color: #000;
+  font-weight: bold;
+  font-size: rem(18px);
+  padding: rem(15px);
+  border: rem(1px) solid #fff;
+  width: 33.33%;
+  max-width: rem(50px);
+  height: rem(40px);
+}
+
+%button-pressed {
+  transition: all 200ms ease-in-out;
+
+  &.current {
+    background-color: rgba(#fff, 0.3);
+  }
+}

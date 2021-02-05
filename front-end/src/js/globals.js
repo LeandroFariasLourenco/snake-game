@@ -1,5 +1,6 @@
 window.GAME = {
   score: 0,
   paused: false,
-  nickname: '',
+  nickname: localStorage.getItem('nickname'),
+  isPageVisible: true,
 };

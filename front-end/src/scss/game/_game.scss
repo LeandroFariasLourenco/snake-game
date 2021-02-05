@@ -1,20 +1,35 @@
 .game {
   &__wrapper {
-    flex-flow: column;
+    display: flex;
+    height: 100vh;
 
     @include flex-centered;
   }
 
   &__canvas {
-    transition: height 1s ease-in-out;
-    border: rem(1px) solid #fff;
-
     &__wrapper {
       width: rem(700px);
       height: rem(500px);
-      border: rem(3px) solid orangered;
+      position: relative;
 
       @include flex-centered;
+    }
+
+    &__state {
+      position: absolute;
+      bottom: rem(-40px);
+      font-family: "Orbitron", sans-serif;
+      color: #fff;
+      font-size: rem(18px);
+      text-transform: uppercase;
+
+      &.active {
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        animation-duration: 3s;
+      }
+
+      @include smooth-hide-show;
     }
   }
 

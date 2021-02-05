@@ -1,4 +1,4 @@
-import { generateFoodPosition } from '../utils/index';
+import { generateFoodPosition, setGameDirection } from '../utils/index';
 
 import Selectors from '../cacheSelectors/game';
 
@@ -116,8 +116,8 @@ export default class Snake {
     const hasEatenFood = newSnakeHead.x === this.Food.positionX
       && newSnakeHead.y === this.Food.positionY;
 
-    if (hasEatenFood && this.speed - 10 > 30) {
-      this.speed -= 5;
+    if (hasEatenFood && this.speed - 10 > 40) {
+      this.speed -= 10;
     }
 
     if (hasEatenFood
@@ -130,31 +130,17 @@ export default class Snake {
     if (!hasEatenFood) {
       this.snakeBody.pop();
     } else {
-      generateFoodPosition();
+      const minPosition = this.Game.sizeMultiplier * 10 + 20;
 
-      this.snakeBody.forEach(({ x, y }) => {
-        const isFoodOnSnakeXaxis = x === this.Food.positionX;
-        const isFoodOnSnakeYaxis = y === this.Food.positionY;
+      this.Food.positionX = generateFoodPosition(this.Game.widthSize - 20, minPosition);
+      this.Food.positionY = generateFoodPosition(this.Game.heightSize - 20, minPosition);
+      this.Food.drawFood(true);
 
-        if (isFoodOnSnakeXaxis && isFoodOnSnakeYaxis) {
-          generateFoodPosition();
-        }
-      });
-
-      this.Food.drawFood();
-
-      const scoreChange = new Event('scoreChange');
+      const scoreChange = new CustomEvent('scoreChange');
       Selectors.score.dispatchEvent(scoreChange);
 
       window.GAME.score += 10;
     }
-  }
-
-  generateRandomFoodPosition() {
-    const minPosition = this.Game.sizeMultiplier * 10 + 20;
-
-    this.Food.positionX = generateFoodPosition(this.Game.widthSize - 20, minPosition);
-    this.Food.positionY = generateFoodPosition(this.Game.heightSize - 20, minPosition);
   }
 
   changeDirection(ev) {
@@ -163,38 +149,39 @@ export default class Snake {
     }
 
     const keyPressed = ev.keyCode;
-    const leftArrow = 37;
-    const rightArrow = 39;
-    const upArrow = 38;
-    const downArrow = 40;
+    const left = { arrow: 37, a: 65 };
+    const right = { arrow: 39, d: 68 };
+    const up = { arrow: 38, w: 87 };
+    const down = { arrow: 40, s: 83 };
 
     const goingUp = this.distanceY === -10;
     const goingDown = this.distanceY === 10;
+
     const goingRight = this.distanceX === 10;
     const goingLeft = this.distanceX === -10;
 
-    if (keyPressed === leftArrow && !goingRight) {
-      this.distanceX = -10;
-      this.distanceY = 0;
-      this.direction = 'left';
+    if (keyPressed === left.arrow && !goingRight) {
+      setGameDirection.apply(this, [-10, 0, 'left']);
+    } else if (keyPressed === left.a && !goingRight) {
+      setGameDirection.apply(this, [-10, 0, 'left', 'a']);
     }
 
-    if (keyPressed === upArrow && !goingDown) {
-      this.distanceX = 0;
-      this.distanceY = -10;
-      this.direction = 'up';
+    if (keyPressed === up.arrow && !goingDown) {
+      setGameDirection.apply(this, [0, -10, 'up']);
+    } else if (keyPressed === up.w && !goingDown) {
+      setGameDirection.apply(this, [0, -10, 'up', 'w']);
     }
 
-    if (keyPressed === rightArrow && !goingLeft) {
-      this.distanceX = 10;
-      this.distanceY = 0;
-      this.direction = 'right';
+    if (keyPressed === right.arrow && !goingLeft) {
+      setGameDirection.apply(this, [10, 0, 'right']);
+    } else if (keyPressed === right.d && !goingLeft) {
+      setGameDirection.apply(this, [10, 0, 'right', 'd']);
     }
 
-    if (keyPressed === downArrow && !goingUp) {
-      this.distanceX = 0;
-      this.distanceY = 10;
-      this.direction = 'down';
+    if (keyPressed === down.arrow && !goingUp) {
+      setGameDirection.apply(this, [0, 10, 'down']);
+    } else if (keyPressed === down.s && !goingUp) {
+      setGameDirection.apply(this, [0, 10, 'down', 's']);
     }
   }
 

@@ -1,3 +1,7 @@
+import melonTexture from '../../images/melon.png';
+import strawberryTexture from '../../images/strawberry.png';
+import watermelonTexture from '../../images/watermelon.png';
+
 export default {
   snakeHeadTexture: {
     width: 10,
@@ -14,11 +18,45 @@ export default {
     height: 20,
     source: 'https://pbs.twimg.com/media/DO6DEgOW0AA8KUA.jpg',
   },
-  fruitTexture: {
-    width: 20,
-    height: 20,
-    source: 'https://art.ngfiles.com/images/404000/404664_thexxxreaper_pixel-apple.png?f1454891997',
-  },
+  fruitTextures:
+  [
+    {
+      name: 'apple',
+      width: 20,
+      height: 20,
+      source: 'https://art.ngfiles.com/images/404000/404664_thexxxreaper_pixel-apple.png?f1454891997',
+    },
+    {
+      name: 'cherry',
+      width: 20,
+      height: 20,
+      source: 'https://www.clipartmax.com/png/full/93-930313_drawn-cherry-pacman-minecraft-pixel-art-disco.png',
+    },
+    {
+      name: 'banana',
+      width: 20,
+      height: 20,
+      source: 'https://cryptostorm.is/blog/bl-content/uploads/pages/autosave-e7855c00c480c25bc3b65e1d99a9081e/banana.png',
+    },
+    {
+      name: 'melon',
+      width: 20,
+      height: 20,
+      source: melonTexture,
+    },
+    {
+      name: 'watermelon',
+      width: 20,
+      height: 20,
+      source: watermelonTexture,
+    },
+    {
+      name: 'strawberry',
+      width: 30,
+      height: 20,
+      source: strawberryTexture,
+    },
+  ],
   snakeBodyTexture: {
     width: 20,
     height: 20,

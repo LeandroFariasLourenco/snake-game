@@ -10,12 +10,22 @@ html(lang="pt-br")
     script(src="../js/vendor.js")
   body
     section(class="game__wrapper fadeInRight")
+      div(class="game__controls")
+        span(class="game__controls__commands") Welcome to Snake Game! Here you can play the game, save your highscore and compete in the leaderboards with your friends!
+        
+        span(class="game__controls__commands") But be careful, the map is riddled with challenges and the map gets smallers as you play.
+
+        span(class="game__controls__commands") You can use both the arrows or wasd to move the snake
+        div(class="game__controls__buttons")
+          include partials/movement-keys.pug
+
+        span(class="game__controls__commands") It is also possible to pause the game by pressing space
+        button(class="game__controls__pause js--key-pause")
+
       div(class="game__canvas__wrapper")
         canvas(width="700" height="500" id="game" class="game__canvas")
+        span(class="js--pause game__canvas__state fade") Paused
 
-      div(class="game__information")
-        div(class="game__pause")
-          button(class="js--pause game__pause__btn") Pause
-
-      div(class="game__score") Score
-        span(class="js--score") 0
+      div(class="game__score")
+        span(class="game__score__nickname js--game-nickname")
+        span(class="game__score__content js--score") 0

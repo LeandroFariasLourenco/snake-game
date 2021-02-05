@@ -95,17 +95,16 @@ export default class Game {
         return;
       }
 
-      this.Snake.Food.drawFood();
+      this.Snake.Food.drawFood(false);
       this.Snake.drawSnake();
 
-      if (this.isGamePaused) {
+      if (this.isGamePaused || window.isGamePaused) {
         this.renderGame();
         return;
       }
 
       this.Snake.moveSnake();
-
       this.renderGame();
-    }, 50);
+    }, this.Snake.speed);
   }
 }

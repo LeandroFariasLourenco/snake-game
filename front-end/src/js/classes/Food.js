@@ -1,9 +1,13 @@
 import textures from '../textures';
 
+import { randomNumber } from '../utils';
+
 export default class Food {
+  randomTexture = randomNumber(textures.fruitTextures.length);
+
   texture = new Image(
-    textures.fruitTexture.width,
-    textures.fruitTexture.height,
+    textures.fruitTextures[this.randomTexture].width,
+    textures.fruitTextures[this.randomTexture].height,
   );
 
   constructor(canvas, px, py) {
@@ -11,10 +15,20 @@ export default class Food {
     this.positionX = px;
     this.canvas = canvas;
     this.canvasContext = canvas.getContext('2d');
-    this.texture.src = textures.fruitTexture.source;
+    this.texture.src = textures.fruitTextures[
+      this.randomTexture
+    ].source;
   }
 
-  drawFood() {
+  drawFood(renderNewTexture) {
+    if (renderNewTexture) {
+      const newRandomTexture = randomNumber(textures.fruitTextures.length);
+
+      this.texture.height = textures.fruitTextures[newRandomTexture].height;
+      this.texture.width = textures.fruitTextures[newRandomTexture].width;
+      this.texture.src = textures.fruitTextures[newRandomTexture].source;
+    }
+
     this.canvasContext.drawImage(
       this.texture,
       this.positionX - 5,

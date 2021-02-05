@@ -1,5 +1,7 @@
 import Selectors from '../cacheSelectors/game';
 
+import { pageVisibilityAPI } from '../utils';
+
 import SnakeClass from '../classes/Snake';
 import GameClass from '../classes/Game';
 
@@ -16,6 +18,7 @@ const game = {
       Game.togglePause(ev);
     });
 
+    Selectors.nickname.textContent = window.GAME.nickname;
     Game.renderGame();
   },
 
@@ -25,13 +28,26 @@ const game = {
     });
 
     Selectors.pause.addEventListener('togglePause', function handleTogglePause() {
-      this.textContent = window.GAME.paused ? 'Resume' : 'Pausar';
+      this.classList.toggle('active');
+      Selectors.pauseButton.classList.toggle('current');
+    });
+
+    document.addEventListener('toggleKeyPressed', ({ detail: key }) => {
+      const allKeys = document.querySelectorAll('.game__button');
+      [...allKeys].forEach((button) => {
+        button.classList.remove('current');
+      });
+
+      const keyToToggleActive = document.querySelector(`.js--key-${key}`);
+      keyToToggleActive.classList.toggle('current');
     });
   },
 
   init: () => {
     game.handleEvents();
     game.beginGame();
+
+    pageVisibilityAPI();
   },
 };
 

@@ -60,6 +60,12 @@ module.exports = {
         ],
       },
       {
+        test: /\.(jpg|png|gif)$/i,
+        use: {
+          loader: 'url-loader',
+        },
+      },
+      {
         test: /\.pug$/,
         use: {
           loader: 'pug-loader',
