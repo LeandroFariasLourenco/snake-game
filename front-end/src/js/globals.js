@@ -3,4 +3,5 @@ window.GAME = {
   paused: false,
   nickname: localStorage.getItem('nickname'),
   isPageVisible: true,
+  isMuted: !!localStorage.getItem('muted'),
 };

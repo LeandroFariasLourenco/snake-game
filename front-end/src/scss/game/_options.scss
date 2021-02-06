@@ -1,0 +1,60 @@
+.game {
+  &__options {
+    @extend %container;
+
+    @include flex-centered;
+
+    //
+    flex-flow: column;
+
+    &__nickname,
+    &__content {
+      color: #fff;
+      font-size: rem(20px);
+      font-family: "Orbitron", sans-serif;
+    }
+
+    &__content {
+      margin-top: rem(10px);
+      display: block;
+      border: rem(2px) solid grey;
+      width: 25%;
+      padding: rem(5px) rem(10px);
+      text-align: center;
+    }
+
+    &__sound {
+      padding: rem(10px);
+      background-color: grey;
+      border: rem(1px) solid #000;
+      cursor: pointer;
+      margin-top: rem(10px);
+      border-radius: rem(50px);
+      transition: background-color 200ms;
+
+      @include flex-centered;
+
+      &:hover {
+        background-color: #fff;
+      }
+
+      svg {
+        width: rem(25px);
+
+        &:not(.is--muted) {
+          display: none;
+
+          & + svg {
+            display: unset;
+          }
+        }
+
+        &.is--muted {
+          & + svg {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

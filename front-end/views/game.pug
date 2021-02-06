@@ -26,6 +26,12 @@ html(lang="pt-br")
         canvas(width="700" height="500" id="game" class="game__canvas")
         span(class="js--pause game__canvas__state fade") Paused
 
-      div(class="game__score")
-        span(class="game__score__nickname js--game-nickname")
-        span(class="game__score__content js--score") 0
+      div(class="game__options")
+        span(class="game__options__nickname js--game-nickname")
+        span(class="game__options__content js--score") 0
+        div(class="game__options__sound js--toggle-sound")
+          include icons/mute.svg
+          include icons/play.svg
+
+      div(class="game__sounds")
+        include partials/sounds.pug

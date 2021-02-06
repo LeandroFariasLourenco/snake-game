@@ -66,6 +66,12 @@ module.exports = {
         },
       },
       {
+        test: /\.mp3$/i,
+        use: {
+          loader: 'file-loader?name=assets/[name].[ext]',
+        },
+      },
+      {
         test: /\.pug$/,
         use: {
           loader: 'pug-loader',

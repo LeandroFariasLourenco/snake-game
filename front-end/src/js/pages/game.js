@@ -5,6 +5,10 @@ import { pageVisibilityAPI } from '../utils';
 import SnakeClass from '../classes/Snake';
 import GameClass from '../classes/Game';
 
+require('../../assets/background-music.mp3');
+require('../../assets/eat-effect.mp3');
+require('../../assets/gameover-music.mp3');
+
 const game = {
   beginGame: () => {
     const canvas = document.querySelector('#game');
@@ -20,6 +24,12 @@ const game = {
 
     Selectors.nickname.textContent = window.GAME.nickname;
     Game.renderGame();
+  },
+
+  handleMusic: () => {
+    // Selectors.backgroundMusic.src = ;
+    // Selectors.foodEffect.src = eatEffect;
+    // Selectors.gameoverMusic.src = gameoverMusic;
   },
 
   handleEvents: () => {
@@ -41,11 +51,27 @@ const game = {
       const keyToToggleActive = document.querySelector(`.js--key-${key}`);
       keyToToggleActive.classList.toggle('current');
     });
+
+    document.addEventListener('toggleSound', ({ detail: isMuted }) => {
+      localStorage.setItem('muted', isMuted);
+      window.GAME.isMuted = isMuted;
+    });
+
+    Selectors.muted.addEventListener('click', function handleUnMutedSound() {
+      this.classList.toggle('is--muted');
+      document.dispatchEvent(new CustomEvent('toggleSound', { detail: false }));
+    });
+
+    Selectors.notMuted.addEventListener('click', function handleMuteSound() {
+      this.previousElementSibling.classList.toggle('is--muted');
+      document.dispatchEvent(new CustomEvent('toggleSound', { detail: true }));
+    });
   },
 
   init: () => {
     game.handleEvents();
     game.beginGame();
+    game.handleMusic();
 
     pageVisibilityAPI();
   },

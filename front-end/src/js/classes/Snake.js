@@ -116,8 +116,8 @@ export default class Snake {
     const hasEatenFood = newSnakeHead.x === this.Food.positionX
       && newSnakeHead.y === this.Food.positionY;
 
-    if (hasEatenFood && this.speed - 10 > 40) {
-      this.speed -= 10;
+    if (hasEatenFood && this.speed - 10 > 35) {
+      this.speed -= 5;
     }
 
     if (hasEatenFood
