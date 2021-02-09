@@ -1,8 +1,7 @@
-import { generateFoodPosition, setGameDirection } from '../utils/index';
+import { textures } from '@Resources/index';
+import { generateFoodPosition, setGameDirection } from '@Utils/index';
 
-import Selectors from '../cacheSelectors/game';
-
-import textures from '../textures';
+// import Selectors from '../cacheSelectors/game';
 
 import Food from './Food';
 
@@ -136,17 +135,17 @@ export default class Snake {
       this.Food.positionY = generateFoodPosition(this.Game.heightSize - 20, minPosition);
       this.Food.drawFood(true);
 
-      const scoreChange = new CustomEvent('scoreChange');
-      Selectors.score.dispatchEvent(scoreChange);
+      // const scoreChange = new CustomEvent('scoreChange');
+      // Selectors.score.dispatchEvent(scoreChange);
 
       window.GAME.score += 10;
     }
   }
 
   changeDirection(ev) {
-    if (window.GAME.paused) {
-      return;
-    }
+    // if (window.GAME.paused) {
+    //   return;
+    // }
 
     const keyPressed = ev.keyCode;
     const left = { arrow: 37, a: 65 };

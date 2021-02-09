@@ -1,8 +1,7 @@
-import Selectors from '../cacheSelectors/game';
-import textures from '../textures';
+import { textures } from '@Resources/index';
 
 export default class Game {
-  isGamePaused = window.GAME.paused;
+  isGamePaused = false;
 
   frameDecrement = 20;
 
@@ -79,8 +78,8 @@ export default class Game {
     const spacebar = 32;
 
     if (keyPressed === spacebar) {
-      const togglePaused = new Event('togglePause');
-      Selectors.pause.dispatchEvent(togglePaused);
+      // const togglePaused = new Event('togglePause');
+      // Selectors.pause.dispatchEvent(togglePaused);
       window.GAME.paused = !window.GAME.paused;
       this.isGamePaused = window.GAME.paused;
     }
@@ -91,14 +90,14 @@ export default class Game {
       this.drawCanvas();
 
       if (this.hasGameEnded()) {
-        alert('Você perdeu');
+        // Selectors.gameoverPopup.dispatchEvent(new CustomEvent('gameover'));
         return;
       }
 
       this.Snake.Food.drawFood(false);
       this.Snake.drawSnake();
 
-      if (this.isGamePaused || window.isGamePaused) {
+      if (this.isGamePaused) {
         this.renderGame();
         return;
       }

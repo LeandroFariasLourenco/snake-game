@@ -11,7 +11,7 @@ module.exports = merge(config, {
     historyApiFallback: {
       index: '/',
     },
-    index: './views/home.html',
+    index: './views/index.html',
     stats: {
       colors: true,
       hash: false,

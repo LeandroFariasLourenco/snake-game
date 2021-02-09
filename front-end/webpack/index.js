@@ -1,13 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const LodashPlugin = require('lodash-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: {
-    home: ['./src/js/home.js', './src/scss/home.scss'],
-    game: ['./src/js/game.js', './src/scss/game.scss'],
-    global: ['./src/js/globals.js', './src/scss/globals.scss'],
-  },
+  entry: './src/snake-game-index.jsx',
   output: {
     path: path.resolve('./build'),
     filename: 'js/[name].js',
@@ -16,16 +12,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './views/home.pug',
-      filename: 'views/home.html',
+      template: './views/index.pug',
+      filename: 'views/index.html',
     }),
-    new HtmlWebpackPlugin({
-      template: './views/game.pug',
-      filename: 'views/game.html',
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-    }),
+    new LodashPlugin(),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -33,7 +23,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js|jsx$/,
         exclude: /node_modules/,
         use: [
           {
@@ -49,14 +39,6 @@ module.exports = {
           {
             loader: 'eslint-loader',
           },
-        ],
-      },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
         ],
       },
       {

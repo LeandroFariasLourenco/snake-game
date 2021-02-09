@@ -5,10 +5,6 @@ import { pageVisibilityAPI } from '../utils';
 import SnakeClass from '../classes/Snake';
 import GameClass from '../classes/Game';
 
-require('../../assets/background-music.mp3');
-require('../../assets/eat-effect.mp3');
-require('../../assets/gameover-music.mp3');
-
 const game = {
   beginGame: () => {
     const canvas = document.querySelector('#game');
@@ -26,22 +22,7 @@ const game = {
     Game.renderGame();
   },
 
-  handleMusic: () => {
-    // Selectors.backgroundMusic.src = ;
-    // Selectors.foodEffect.src = eatEffect;
-    // Selectors.gameoverMusic.src = gameoverMusic;
-  },
-
-  handleEvents: () => {
-    Selectors.score.addEventListener('scoreChange', function handleScore() {
-      this.textContent = window.GAME.score;
-    });
-
-    Selectors.pause.addEventListener('togglePause', function handleTogglePause() {
-      this.classList.toggle('active');
-      Selectors.pauseButton.classList.toggle('current');
-    });
-
+  handleKeyPressActive: () => {
     document.addEventListener('toggleKeyPressed', ({ detail: key }) => {
       const allKeys = document.querySelectorAll('.game__button');
       [...allKeys].forEach((button) => {
@@ -51,7 +32,22 @@ const game = {
       const keyToToggleActive = document.querySelector(`.js--key-${key}`);
       keyToToggleActive.classList.toggle('current');
     });
+  },
 
+  handleScoreChange: () => {
+    Selectors.score.addEventListener('scoreChange', function handleScore() {
+      this.textContent = window.GAME.score;
+    });
+  },
+
+  handlePauseGame: () => {
+    Selectors.pause.addEventListener('togglePause', function handleTogglePause() {
+      this.classList.toggle('active');
+      Selectors.pauseButton.classList.toggle('current');
+    });
+  },
+
+  handleMutedSound: () => {
     document.addEventListener('toggleSound', ({ detail: isMuted }) => {
       localStorage.setItem('muted', isMuted);
       window.GAME.isMuted = isMuted;
@@ -68,11 +64,19 @@ const game = {
     });
   },
 
-  init: () => {
-    game.handleEvents();
-    game.beginGame();
-    game.handleMusic();
+  handleGameOverPopup: () => {
+    Selectors.gameoverPopup.addEventListener('gameover', function handlePopup() {
+      this.classList.toggle('active');
+    });
+  },
 
+  init: () => {
+    game.handleMutedSound();
+    game.handleScoreChange();
+    game.handlePauseGame();
+    game.handleKeyPressActive();
+    game.handleGameOverPopup();
+    game.beginGame();
     pageVisibilityAPI();
   },
 };

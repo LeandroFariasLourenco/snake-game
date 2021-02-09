@@ -35,3 +35,16 @@ html(lang="pt-br")
 
       div(class="game__sounds")
         include partials/sounds.pug
+
+      div(class="game__over js--gameover-modal")
+        div(class="game__over__overlay")
+        div(class="game__over__content")
+          img(class="game__over__image" src="../images/gameover.jpg")
+          span(class="game__over__text") Congrats
+          span(class="game__over__text nickname js--gameover-nickname")
+          span(class="game__over__text") on your score of 
+          span(class="game__over__text score js--gameover-score")
+          span(class="game__over__text") if you want to, you can upload your score to the leaderboards, it's easy, just click on the button below, or exit the game to the main menu 
+
+          button(class="game__over__button js--gameover-upload-score") Upload to leaderboards 
+          button(class="game__over__button js--gameover-main-menu") Main menu

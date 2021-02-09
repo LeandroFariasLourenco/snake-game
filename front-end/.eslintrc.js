@@ -9,6 +9,7 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb/hooks',
+    'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:ramda/recommended',
     'plugin:promise/recommended',
@@ -24,12 +25,16 @@ module.exports = {
     },
   },
   plugins: [
+    'react',
     'jsx-a11y',
     'ramda',
     'import',
     'promise',
   ],
   settings: {
+    react: {
+      version: 'detect',
+    },
     'import/resolver': {
       'babel-module': {},
       node: {
@@ -47,7 +52,11 @@ module.exports = {
     'no-unused-vars': 'warn',
     semi: ['warn', 'always'],
     'import/prefer-default-export': 'off',
+    'jsx-quotes': ['warn', 'prefer-single'],
     'no-console': 'warn',
+    'react/no-danger': 'off',
+    'react/display-name': 'off',
+    'react/jsx-props-no-spreading': 'off',
     indent: ['error', 2],
   },
 };

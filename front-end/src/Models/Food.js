@@ -1,6 +1,6 @@
-import textures from '../textures';
+import { textures } from '@Resources/index';
 
-import { randomNumber } from '../utils';
+import { randomNumber } from '@Utils/index';
 
 export default class Food {
   randomTexture = randomNumber(textures.fruitTextures.length);

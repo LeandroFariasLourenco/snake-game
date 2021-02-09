@@ -1,0 +1,5 @@
+{
+  "disallowIdLiterals": null,
+  "disallowBlockExpansion": null,
+  "requireSpaceAfterCodeOperator": true
+}
