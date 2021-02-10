@@ -7,6 +7,7 @@
       "@Pages/*": ["./src/Pages/*"],
       "@Resources/*": ["./src/Resources/*"],
       "@Redux/*": ["./src/Redux/*"],
+      "@Ducks/*": ["./src/Redux/ducks/*"],
       "@Theme/*": ["./src/Theme/*"],
       "@Constants/*": ["./src/Constants/*"],
       "@Assets/*": ["./src/Assets/*"],

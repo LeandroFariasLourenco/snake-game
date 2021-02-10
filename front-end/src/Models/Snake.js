@@ -1,7 +1,8 @@
 import { textures } from '@Resources/index';
-import { generateFoodPosition, setGameDirection } from '@Utils/index';
 
-// import Selectors from '../cacheSelectors/game';
+import { setScore } from '@Ducks/game';
+
+import { generateFoodPosition, setGameDirection } from '@Utils/index';
 
 import Food from './Food';
 
@@ -38,7 +39,7 @@ export default class Snake {
 
   changingDirection = false;
 
-  constructor(canvas) {
+  constructor(canvas, dispatch) {
     this.canvas = canvas;
     this.canvasContext = canvas.getContext('2d');
     this.Food = new Food(
@@ -49,6 +50,8 @@ export default class Snake {
 
     this.snakeBodyTexture.src = textures.snakeBodyTexture.source;
     this.snakeHeadTexture.src = textures.snakeHeadTexture.source;
+    this.score = 0;
+    this.dispatchAction = dispatch;
   }
 
   drawSnake() {
@@ -135,17 +138,15 @@ export default class Snake {
       this.Food.positionY = generateFoodPosition(this.Game.heightSize - 20, minPosition);
       this.Food.drawFood(true);
 
-      // const scoreChange = new CustomEvent('scoreChange');
-      // Selectors.score.dispatchEvent(scoreChange);
-
-      window.GAME.score += 10;
+      this.dispatchAction(setScore(this.score += 10));
+      this.score += 10;
     }
   }
 
-  changeDirection(ev) {
-    // if (window.GAME.paused) {
-    //   return;
-    // }
+  changeDirection(ev, isPaused) {
+    if (isPaused) {
+      return;
+    }
 
     const keyPressed = ev.keyCode;
     const left = { arrow: 37, a: 65 };

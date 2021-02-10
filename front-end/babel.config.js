@@ -32,6 +32,7 @@ module.exports = {
         '@Pages': './src/Pages',
         '@Style': './src/Style',
         '@Redux': './src/Redux',
+        '@Ducks': './src/Redux/ducks',
         '@Theme': './src/Theme',
         '@Constants': './src/Constants',
         '@Assets': './src/Assets',

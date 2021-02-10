@@ -1,16 +1,23 @@
 import { textures } from '@Resources/index';
 
-export default class Game {
-  isGamePaused = false;
+import { setGameover, setPaused } from '@Ducks/game';
 
+export default class Game {
   frameDecrement = 20;
 
   sizeMultiplier = 0;
 
-  constructor(canvas, snake) {
+  constructor(
+    canvas,
+    Snake,
+    dispatch,
+  ) {
     this.canvas = canvas;
     this.canvasContext = canvas.getContext('2d');
-    this.Snake = snake;
+    this.Snake = Snake;
+
+    this.isGamePaused = false;
+    this.dispatchAction = dispatch;
 
     this.widthSize = this.canvas.width - this.frameDecrement;
     this.heightSize = this.canvas.height - this.frameDecrement;
@@ -78,10 +85,8 @@ export default class Game {
     const spacebar = 32;
 
     if (keyPressed === spacebar) {
-      // const togglePaused = new Event('togglePause');
-      // Selectors.pause.dispatchEvent(togglePaused);
-      window.GAME.paused = !window.GAME.paused;
-      this.isGamePaused = window.GAME.paused;
+      this.dispatchAction(setPaused(!this.isGamePaused));
+      this.isGamePaused = !this.isGamePaused;
     }
   }
 
@@ -90,7 +95,7 @@ export default class Game {
       this.drawCanvas();
 
       if (this.hasGameEnded()) {
-        // Selectors.gameoverPopup.dispatchEvent(new CustomEvent('gameover'));
+        this.dispatchAction(setGameover(true));
         return;
       }
 

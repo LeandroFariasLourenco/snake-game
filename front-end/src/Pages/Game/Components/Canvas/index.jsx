@@ -1,36 +1,38 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from 'react';
-
+import React, { useEffect, useRef, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { SnakeModel, GameModel } from '@Models/index';
 
 import * as S from './styled';
 
 const Canvas = () => {
   const canvasRef = useRef();
+  const dispatch = useDispatch();
+  const gameStore = useSelector((state) => state.game);
 
-  const handleKeyPress = useCallback((ev, Snake, Game) => {
-    Snake.changeDirection(ev);
-    Game.togglePause(ev);
-  }, []);
-
-  useEffect(() => {
+  const beginGame = useCallback(() => {
     const canvas = canvasRef.current;
 
-    const Snake = new SnakeModel(canvas);
-
-    const Game = new GameModel(canvas, Snake);
+    const Snake = new SnakeModel(canvas, dispatch);
+    const Game = new GameModel(
+      canvas,
+      Snake,
+      dispatch,
+    );
 
     Snake.snakeFrame = Game;
     Game.renderGame();
 
-    document.addEventListener('keydown', (ev) => handleKeyPress(ev, Snake, Game));
+    document.addEventListener('keydown', (ev) => {
+      Snake.changeDirection(ev, gameStore.paused);
+      Game.togglePause(ev);
+    });
 
-    return document.removeEventListener('keydown', handleKeyPress);
-  }, [canvasRef, handleKeyPress]);
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [dispatch]);
+
+  useEffect(() => {
+    beginGame();
+  }, [beginGame]);
 
   return (
     <S.CanvasWrapper>

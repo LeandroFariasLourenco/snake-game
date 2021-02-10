@@ -1,10 +1,10 @@
-function setGameDirection(x, y, direction, keyPressed = direction) {
-  const customEvent = new CustomEvent('toggleKeyPressed', { detail: keyPressed });
+import { setCurrentPressedKey } from '@Ducks/game';
 
+function setGameDirection(x, y, direction, keyPressed = direction) {
   this.distanceX = x;
   this.distanceY = y;
   this.direction = direction;
-  document.dispatchEvent(customEvent);
+  this.dispatchAction(setCurrentPressedKey(keyPressed));
 }
 
 export default setGameDirection;
