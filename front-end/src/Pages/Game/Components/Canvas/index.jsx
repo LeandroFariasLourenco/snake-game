@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import cx from 'classnames';
+
 import { SnakeModel, GameModel } from '@Models/index';
 
 import * as S from './styled';
@@ -7,7 +9,7 @@ import * as S from './styled';
 const Canvas = () => {
   const canvasRef = useRef();
   const dispatch = useDispatch();
-  const gameStore = useSelector((state) => state.game);
+  const { paused } = useSelector((state) => state.game);
 
   const beginGame = useCallback(() => {
     const canvas = canvasRef.current;
@@ -23,11 +25,8 @@ const Canvas = () => {
     Game.renderGame();
 
     document.addEventListener('keydown', (ev) => {
-      Snake.changeDirection(ev, gameStore.paused);
       Game.togglePause(ev);
     });
-
-    /* eslint-disable react-hooks/exhaustive-deps */
   }, [dispatch]);
 
   useEffect(() => {
@@ -41,6 +40,12 @@ const Canvas = () => {
         height={500}
         width={700}
       />
+
+      <S.PausedNotification
+        className={cx({ hidden: !paused })}
+      >
+        Paused
+      </S.PausedNotification>
     </S.CanvasWrapper>
   );
 };

@@ -52,7 +52,7 @@ const Information = () => {
         It is also possible to pause the game by pressing space
       </S.InformationText>
       <S.SpaceKey
-        className={cx({ 'is--active': currentPressedKey })}
+        className={cx({ 'is--active': paused })}
       />
 
     </S.InformationWrapper>
@@ -63,7 +63,6 @@ renderKeys.propTypes = {
   id: PropTypes.string.isRequired,
   command: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  currentPressedKey: PropTypes.string.isRequired,
   key: PropTypes.string.isRequired,
 };
 

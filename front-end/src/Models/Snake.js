@@ -17,6 +17,8 @@ export default class Snake {
     textures.snakeBodyTexture.height,
   );
 
+  score = 0;
+
   speed = 120;
 
   snakeColor = 'lightblue';
@@ -50,7 +52,6 @@ export default class Snake {
 
     this.snakeBodyTexture.src = textures.snakeBodyTexture.source;
     this.snakeHeadTexture.src = textures.snakeHeadTexture.source;
-    this.score = 0;
     this.dispatchAction = dispatch;
   }
 
@@ -138,8 +139,10 @@ export default class Snake {
       this.Food.positionY = generateFoodPosition(this.Game.heightSize - 20, minPosition);
       this.Food.drawFood(true);
 
-      this.dispatchAction(setScore(this.score += 10));
-      this.score += 10;
+      if (this.Game.sizeMultiplier > 8) {
+        this.dispatchAction(setScore(this.score += (8 * 5)));
+      }
+      this.dispatchAction(setScore(this.score += (this.Game.sizeMultiplier * 5)));
     }
   }
 

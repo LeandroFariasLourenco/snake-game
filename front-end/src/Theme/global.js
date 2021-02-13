@@ -3,12 +3,14 @@ import { createGlobalStyle } from 'styled-components';
 
 import backgroundImage from '@Assets/Images/background.jpg';
 
+import { fontsFaces } from './fonts';
+
 export default createGlobalStyle`
   ${reset};
+  ${fontsFaces};
 
-  @font-face {
-    font-family: "Orbitron";
-    src: url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap");
+  * {
+    box-sizing: border-box;
   }
 
   body {

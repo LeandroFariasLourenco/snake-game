@@ -54,6 +54,12 @@ module.exports = {
         },
       },
       {
+        test: /\.ttf|woff|woff2$/i,
+        use: {
+          loader: 'file-loader?name=assets/fonts/[name].[ext]',
+        },
+      },
+      {
         test: /\.pug$/,
         use: {
           loader: 'pug-loader',

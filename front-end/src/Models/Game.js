@@ -87,6 +87,8 @@ export default class Game {
     if (keyPressed === spacebar) {
       this.dispatchAction(setPaused(!this.isGamePaused));
       this.isGamePaused = !this.isGamePaused;
+    } else {
+      this.Snake.changeDirection(ev, this.isGamePaused);
     }
   }
 

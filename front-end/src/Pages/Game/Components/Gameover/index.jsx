@@ -1,7 +1,7 @@
 import React from 'react';
-import cx from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import cx from 'classnames';
 
 import C from '@Constants/index';
 
@@ -28,10 +28,19 @@ const Gameover = () => {
     <S.GameoverFakeWrapper
       className={cx({ active: gameover })}
     >
-      <S.GameoverWrapper />
-      <S.GameoverContent>
-        Mano o a zideia kkkkkkkk
-      </S.GameoverContent>
+      <S.GameoverWrapper>
+        <S.GameoverContent>
+          <S.GameoverAnimation />
+          <S.GameoverOptions>
+            Oh no...
+            <br />
+            Seems like you&apos;ve met your end but don&apos;t
+            worry you can let other people know you put up a great
+            fight by uploading your score.
+            <br />
+          </S.GameoverOptions>
+        </S.GameoverContent>
+      </S.GameoverWrapper>
     </S.GameoverFakeWrapper>
   );
 };
