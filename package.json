@@ -1,0 +1,32 @@
+{
+  "name": "snake-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint:front-end": "cd front-end && yarn lint && cd ..",
+    "lint:back-end": "cd back-end && yarn lint && yarn test && cd .."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4"
+  },
+  "private": true,
+  "workspaces": [
+    "front-end",
+    "back-end"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeandroFariasLourenco/snake-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeandroFariasLourenco/snake-game/issues"
+  },
+  "homepage": "https://github.com/LeandroFariasLourenco/snake-game#readme"
+}

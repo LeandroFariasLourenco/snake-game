@@ -5,6 +5,8 @@ import cx from 'classnames';
 
 import C from '@Constants/index';
 
+import Popup from '@Components/Popup';
+
 import { setGameover } from '@Ducks/game';
 
 import * as S from './styled';
@@ -16,19 +18,19 @@ const Gameover = () => {
 
   const handleUploadScore = () => {
     dispatch(setGameover(false));
-    history.navigate(C.paths.leaderboards);
+    history.push(C.paths.leaderboards);
   };
 
   const handleMainMenu = () => {
     dispatch(setGameover(false));
-    history.navigate(C.paths.home);
+    history.push(C.paths.home);
   };
 
   return (
     <S.GameoverFakeWrapper
       className={cx({ active: gameover })}
     >
-      <S.GameoverWrapper>
+      <Popup>
         <S.GameoverContent>
           <S.GameoverAnimation />
           <S.GameoverOptions>
@@ -38,9 +40,24 @@ const Gameover = () => {
             worry you can let other people know you put up a great
             fight by uploading your score.
             <br />
+
+            <S.GameButton
+              title='Upload score'
+              gameButton
+              onClick={() => handleUploadScore()}
+            >
+              Upload score
+            </S.GameButton>
+            <S.GameButton
+              title='Home'
+              gameButton
+              onClick={() => handleMainMenu()}
+            >
+              Main menu
+            </S.GameButton>
           </S.GameoverOptions>
         </S.GameoverContent>
-      </S.GameoverWrapper>
+      </Popup>
     </S.GameoverFakeWrapper>
   );
 };

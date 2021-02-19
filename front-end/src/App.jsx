@@ -8,7 +8,7 @@ import store from '@Redux';
 import Routes from '@Routes';
 import GlobalStyles from '@Theme/global';
 
-const Main = () => (
+const App = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -18,6 +18,6 @@ const Main = () => (
 );
 
 ReactDOM.render(
-  <Main />,
+  <App />,
   document.querySelector('#snake-game-app'),
 );

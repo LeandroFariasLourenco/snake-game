@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "lib": [
+      "ES6"
+    ],
+    "allowJs": true,
+    "sourceMap": false,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "removeComments": true,
+    "strict": false,
+    "types": ["jest", "mocha"],
+    "typeRoots": [
+      "../node_modules/@types",
+      "./src/@types"
+    ],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@Controllers/*": [
+        "./src/controllers/*"
+      ],
+      "@Models/*": [
+        "./src/models/*"
+      ],
+      "@Types/*": [
+        "./src/@types/*"
+      ],
+      "@Config/*": [
+        "./src/config/*"
+      ],
+      "@Database/*": [
+        "./src/database/*"
+      ],
+      "@Routes/*": [
+        "./src/routes/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

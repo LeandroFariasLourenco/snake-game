@@ -19,7 +19,7 @@ export default class Snake {
 
   score = 0;
 
-  speed = 120;
+  speed = 110;
 
   snakeColor = 'lightblue';
 

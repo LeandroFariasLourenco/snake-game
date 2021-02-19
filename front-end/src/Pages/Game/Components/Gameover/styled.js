@@ -1,13 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 import { rem } from 'polished';
 
-export const GameoverWrapper = styled.div`
-  ${({ theme }) => theme.mixins.popupOverlay(theme.zIndexes.overlay)};
-  background-color: rgba(0, 0, 0, 0.5);
-`;
+import Button from '@Components/Button';
 
 export const GameoverContent = styled.div`
-  ${({ theme }) => theme.mixins.popup(theme.zIndexes.popup)};
   ${({ theme }) => theme.mixins.flexCentered};
   flex-flow: column;
   max-width: ${rem(350)};
@@ -15,6 +11,11 @@ export const GameoverContent = styled.div`
 
 export const GameoverFakeWrapper = styled.div`
   ${({ theme }) => theme.mixins.visibilityTransition};
+`;
+
+export const GameButton = styled(Button)`
+  font-size: ${rem(14)};
+  margin: ${rem(10)} auto;
 `;
 
 const gameoverAnimation = keyframes`
@@ -100,10 +101,10 @@ export const GameoverOptions = styled.div`
   animation-name: ${showGameoverText};
   animation-iteration-count: 1;
   animation-delay: 6.5s;
-  animation-duration: 4s;
+  animation-duration: 3s;
   animation-fill-mode: both;
   margin-top: ${rem(8)};
-  padding: ${rem(10)} ${rem(7)};
+  padding: ${rem(10)} ${rem(10)};
   background-color: #000;
   width: 100%;
   max-height: 0;

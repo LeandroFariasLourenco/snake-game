@@ -3,7 +3,7 @@ const LodashPlugin = require('lodash-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: './src/snake-game-index.jsx',
+  entry: './src/App.jsx',
   output: {
     path: path.resolve('./build'),
     filename: 'js/[name].js',
