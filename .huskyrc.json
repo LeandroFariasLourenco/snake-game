@@ -1,9 +1,0 @@
-{
-  "hooks": {
-    "pre-commit": "yarn lint:front-end && yarn lint:back-end",
-    "pre-applypatch": "echo \"Verificando arquivos...\"",
-    "pre-push": "yarn lint:front-end && yarn lint:back-end",
-    "post-applypatch": "git push -u origin",
-    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-  }
-}
