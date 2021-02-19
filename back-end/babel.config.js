@@ -19,6 +19,7 @@ module.exports = {
         '@Config': './src/config',
         '@Database': './src/database',
         '@Routes': './src/routes',
+        '@Interfaces': './src/interfaces',
       },
     }],
   ],

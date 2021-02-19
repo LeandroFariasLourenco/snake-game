@@ -1,37 +1,77 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
+// import { Result, ValidationError } from 'express-validator';
 
-import DatabaseConnection from '@Database/DatabaseConnection';
-import { PlayerModel } from '@Models/index';
+import MongoDb from '@Database/MongoDb';
+import { IPlayersController } from '@Interfaces/index';
+// import { PlayerModel } from '@Models/index';
 
-class PlayersController {
-  players: Array<PlayerModel> = [];
+class PlayersController implements IPlayersController {
+  players = [];
 
-  request: Request;
+  response = {
+    body: {},
+  };
 
-  response: Response;
+  async getPlayers(res: Response): Promise<Response> {
+    const Mongo = new MongoDb('snake-game', 'players');
+    // const client = await Mongo.getClient();
+    // try {
+    //   const players = await Mongo.collection.find({}).toArray();
+    //   this.players = [...players];
 
-  databaseConnection: DatabaseConnection;
+    //   res.statusCode = 200;
+    //   this.response.body = this.players;
 
-  constructor() {
-    this.databaseConnection = new DatabaseConnection(process.env.DATABASE_CONNECTION_URI);
+    //   client.close();
+    //   return res.json(this.response);
+    // } catch (e) {
+    //   client.close();
+    //   res.statusCode = 500;
+    //   this.response.body = {
+    //     message: 'Ocorreu um erro interno no servidor',
+    //   };
+    //   return res.json(this.response);
+    // }
   }
 
-  getPlayers(req: Request, res: Response): Response {
-    (async () => this.databaseConnection.connect())();
+  // async postPlayers(
+  //   req: Request,
+  //   res: Response,
+  //   errors: Array<Result<ValidationError>>,
+  // ): Promise<Response> {
+  //   if (errors.length) {
+  //     res.statusCode = 400;
+  //     return res.json({
+  //       body: errors,
+  //     });
+  //   }
 
-    this.databaseConnection.getMongoClient().db('Snake-Game');
+  //   const Mongo = new MongoDb('snake-game', 'players');
+  //   const client = await Mongo.getClient();
 
-    this.databaseConnection.close();
-    return res.json({
-      statusCode: 200,
-      body: this.players,
-    });
-  }
+  //   try {
+  //     const document: PlayerModel = {
+  //       nickname: req.body.nickname,
+  //       score: req.body.score,
+  //     };
+  //     const result = await Mongo.collection.insertOne(document);
 
-  postPlayers(req: Request, res: Response): void {
-    console.log('teste', req);
-    console.log('teste', res);
-  }
+  //     client.close();
+  //     res.statusCode = 200;
+
+  //     return res.json({
+  //       body: result,
+  //     });
+  //   } catch (e) {
+  //     res.statusCode = 500;
+  //     this.response.body = {
+  //       message: 'Ocorreu um erro interno no servidor',
+  //     };
+
+  //     client.close();
+  //     return res.json(this.response);
+  //   }
+  // }
 }
 
 export default PlayersController;

@@ -1,1 +1,2 @@
-export { default as IPlayerResponse } from './IPlayerResponse';
+export { default as PlayersResponse } from './PlayersResponse';
+export { default as Result } from './Result';

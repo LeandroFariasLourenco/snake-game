@@ -1,4 +1,5 @@
-import { Application } from 'express';
+import { Application, Request, Response } from 'express';
+import { validationResult, body } from 'express-validator';
 
 import PlayersController from '@Controllers/PlayersController';
 
@@ -12,10 +13,17 @@ class Routing {
   }
 
   init(): void {
-    this.app.get('/players', (req, res) => {
-      this.PlayersController.getPlayers(req, res);
+    this.app.get('/players', (req: Request, res: Response) => {
+      this.PlayersController.getPlayers(res);
     });
-    this.app.post('/players', this.PlayersController.postPlayers);
+
+    this.app.post('/players',
+      body('nickname').isString(),
+      body('score').isNumeric(),
+      (req: Request, res: Response) => {
+        const errors = validationResult(req);
+        this.PlayersController.postPlayers(req, res, errors);
+      });
   }
 }
 

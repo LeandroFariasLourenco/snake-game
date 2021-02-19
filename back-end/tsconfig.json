@@ -41,6 +41,9 @@
       ],
       "@Routes/*": [
         "./src/routes/*"
+      ],
+      "@Interfaces/*": [
+        "./src/interfaces/*"
       ]
     }
   },
