@@ -29,10 +29,12 @@
     "url": "https://github.com/LeandroFariasLourenco/snake-game/issues"
   },
   "homepage": "https://github.com/LeandroFariasLourenco/snake-game#readme",
-  "hooks": {
-    "pre-commit": "yarn lint:front-end && yarn lint:back-end",
-    "pre-push": "yarn lint:front-end && yarn lint:back-end",
-    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-    "post-commit": "git push -u"
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:front-end && yarn lint:back-end",
+      "pre-push": "yarn lint:front-end && yarn lint:back-end",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "post-commit": "git push -u"
+    }
   }
 }
