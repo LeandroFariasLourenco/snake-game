@@ -54,7 +54,7 @@
     "git-cz": "^4.7.0",
     "html-webpack-plugin": "^4.5.1",
     "husky": "^4.2.5",
-    "image-webpack-loader": "^6.0.0",
+    "image-webpack-loader": "^8.0.1",
     "lint-staged": "^10.2.10",
     "lodash-webpack-plugin": "^0.11.5",
     "node-env-run": "^4.0.1",
